@@ -12,7 +12,7 @@
             <div class="icono_menu_a" @mouseenter="mostrar_titulo('miembros')" @mouseleave="ocultar_titulo('miembros')" @click="set_modulo('Miembros')">
                 <i class="fas fa-user-friends"></i>
                 <div v-if="btn_btn == 'miembros'" class="nombre_seccion" style="position: fixed; top: 61px;">
-                    Miembrosx
+                    Miembros
                 </div>
             </div>
             <!-- <div v-if=" tipo == 'root' || permisos.entrevistas_pendientes.ver == 1" class="icono_menu_a" @click="set_modulo('Entrevistas')">

@@ -1,6 +1,6 @@
 {
-  "name": "appvue",
-  "version": "0.1.1",
+  "name": "membresias",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
