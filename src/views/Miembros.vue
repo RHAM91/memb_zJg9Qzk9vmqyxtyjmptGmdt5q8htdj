@@ -1,4 +1,6 @@
 <template>
+    <!-- MODULO DE MIEMBROS -->
+
     <div class="contenedor">
         <div class="asidex">
             <div class="icono_menu_a" @mouseenter="mostrar_titulo('inicio')" @mouseleave="ocultar_titulo('inicio')" @click="set_ruta('Main')">
@@ -10,7 +12,7 @@
             <div class="icono_menu_a" @mouseenter="mostrar_titulo('miembros')" @mouseleave="ocultar_titulo('miembros')" @click="set_modulo('Miembros')">
                 <i class="fas fa-user-friends"></i>
                 <div v-if="btn_btn == 'miembros'" class="nombre_seccion" style="position: fixed; top: 61px;">
-                    Miembros
+                    Miembrosx
                 </div>
             </div>
             <!-- <div v-if=" tipo == 'root' || permisos.entrevistas_pendientes.ver == 1" class="icono_menu_a" @click="set_modulo('Entrevistas')">
@@ -24,6 +26,10 @@
                 <div v-if="btn_btn == 'configuracion'" class="nombre_seccion" style="position: fixed; top: 101px;">
                     Configuración
                 </div>
+            </div>
+
+            <div class="vversion">
+                {{version}}
             </div>
             
             <b-button type="button" id="btn_usuario" size="sm" variant="primary" @click="abrirFichaUsuario"><i class="fas fa-user-circle"></i></b-button>
@@ -46,6 +52,18 @@
 
         </div>
 
+        <div v-if="update" @click="pushversion" class="btn_actualizacion">
+            Actualizar
+        </div>
+        <!-- <div v-if="update_modulo" @click="pushversionmodulo" class="btn_actualizacion_modulo">
+            Actualizar
+        </div> -->
+        <!-- <div v-if="update_loading" @click="pushversionmodulo" class="actualizando">
+            <div class="contenedor_load">
+                <img src="@/assets/update.gif" style="width:100%;" alt="">
+            </div>
+        </div> -->
+
 
     </div>
 </template>
@@ -60,6 +78,8 @@ import store from '../store'
 import VueSocketIOExt from 'vue-socket.io-extended'
 import  io  from 'socket.io-client'
 import axios from 'axios'
+import { ipcRenderer } from 'electron'
+window.ipcRenderer = ipcRenderer
 
 import { mapActions, mapState } from 'vuex'
 
@@ -88,7 +108,11 @@ export default {
             modulo: 'Miembros',
             sub_menu: '',
             modal_ficha_usuario: false,
-            btn_btn: ''
+            btn_btn: '',
+            update: false,
+            // update_modulo: false,
+            // update_loading: false,
+            version: ''
         }
     },
     methods: {
@@ -154,6 +178,25 @@ export default {
         ocultar_titulo(b){
             this.btn_btn = ''
         },
+        getVersion(){
+            ipcRenderer.send('app_version')
+            ipcRenderer.on('app_version', (event, args)=>{
+                ipcRenderer.removeAllListeners('app_version')
+                this.version = args.version
+            })
+            ipcRenderer.on('actualizacion', (event, message)=>{
+                this.update = message
+            })
+        },
+        pushversion(){
+            ipcRenderer.send('ok_update')
+        },
+        // pushversionmodulo(){
+        //     this.update_modulo = false
+        //     this.update_loading = true
+        //     console.log('Actualizando....')
+        //     ipcRenderer.send('ActualizarModulo')
+        // },
         ...mapActions(['descargar_datos', 'receptor', 'getPermission'])
     },
     mounted() {
@@ -162,6 +205,8 @@ export default {
         this.descargar_datos(this.$socket) // descarga los datos nuevos al iniciar app
         this.receptor() // esta funcion recibe la orden de actulizar un modulo en especifico y descarga los datos cuando haya nueva informacion disponible
         this.getPermission() // descarga los permisos de cada modulo
+        this.getVersion() // obtiene la version de la applicacion
+
         
     },
 }
@@ -389,5 +434,74 @@ export default {
         /* background-color: #F90; // naranja  */ 
         background-color: #29B6F6;
         background-image: -webkit-linear-gradient(90deg,rgba(255, 255, 255, .2) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, .2) 50%,rgba(255, 255, 255, .2) 75%,transparent 75%,transparent)
+    }
+
+
+
+    /* BTN PARA ACTUALIZAR */
+    .btn_actualizacion{
+        width: 200px;
+        height: 40px;
+        background-color: #3993DD;
+        color: white;
+        position: fixed;
+        bottom: 0;
+        left: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        user-select: none;
+        transition: .2s ease;
+        cursor: pointer;
+    }
+        .btn_actualizacion:active{
+            background-color: #F2A541;
+        }
+    .btn_actualizacion_modulo{
+        width: 200px;
+        height: 40px;
+        background-color: #F4D35E;
+        color: black;
+        position: fixed;
+        bottom: 0;
+        left: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        user-select: none;
+        transition: .2s ease;
+        cursor: pointer;
+    }
+        .btn_actualizacion_modulo:active{
+            background-color: #DA4167;
+            color: white;
+        }
+    .actualizando{
+        width: 200px;
+        height: 40px;
+        position: fixed;
+        bottom: 5px;
+        left: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        user-select: none;
+    }
+        .contenedor_load{
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    .vversion{
+        color: white;
+        font-size: 15px;
+        position: fixed;
+        bottom: 100px;
+        user-select: none;
     }
 </style>

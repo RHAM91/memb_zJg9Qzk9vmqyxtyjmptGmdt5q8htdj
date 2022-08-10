@@ -1,4 +1,7 @@
 <template>
+
+    <!-- MODULOS A ESCOGER -->
+
     <div class="contenedor_inicio">
         <div class="top_verde_">
             
