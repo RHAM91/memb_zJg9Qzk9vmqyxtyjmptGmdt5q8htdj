@@ -33,9 +33,9 @@
                                 <b-button size="sm" variant="info" style="margin-left: 15px;" class="mb-2" @click="imprimir_reporte_especifico">
                                     <b-icon icon="printer" aria-hidden="true"></b-icon> Ficha datos específicos
                                 </b-button>
-                                <b-button size="sm" variant="warning" style="margin-left: 15px;" class="mb-2" @click="abrirModalCamara">
+                                <!-- <b-button size="sm" variant="warning" style="margin-left: 15px;" class="mb-2" @click="abrirModalCamara">
                                     <b-icon icon="camera" aria-hidden="true"></b-icon> Tomar foto
-                                </b-button>
+                                </b-button> -->
                                 <!-- <input type="file" id="uploadfile" @change="uploadFile" ref="btnUpload"> -->
                                 <b-button size="sm" variant="primary" style="margin-left: 15px;" class="mb-2" @click="abrir_modal_recotar_foto">
                                     <b-icon icon="upload" aria-hidden="true"></b-icon> Subir Foto

@@ -9,11 +9,11 @@
                 </b-col>
                 <b-col sm="3" class="mt-3">
                     <label for="">DPI</label>
-                    <b-form-input type="text" v-model="dpi" required size="sm"></b-form-input>
+                    <b-form-input type="text" v-model="dpi" readonly required size="sm"></b-form-input>
                 </b-col>
                 <b-col sm="7" class="mt-3">
                     <label for="">Nombre</label>
-                    <b-form-input type="text" v-model="nombre" required size="sm"></b-form-input>
+                    <b-form-input type="text" id="nombre_edicion_miembro" v-model="nombre" required size="sm"></b-form-input>
                 </b-col>
                 <b-col sm="2" class="mt-3">
                     <label for="">Sexo</label>
@@ -221,6 +221,7 @@ export default {
     },
     mounted() {
         this.setDatos()
+        document.getElementById('nombre_edicion_miembro').focus()
     },
 }
 </script>
