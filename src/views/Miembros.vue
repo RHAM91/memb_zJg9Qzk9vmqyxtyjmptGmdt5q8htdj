@@ -28,6 +28,13 @@
                 </div>
             </div>
 
+            <!-- <div class="icono_menu_a" @mouseenter="mostrar_titulo('configuracion')" @mouseleave="ocultar_titulo('configuracion')" @click="getIP">
+                <i class="fas fa-cog"></i>
+                <div v-if="btn_btn == 'configuracion'" class="nombre_seccion" style="position: fixed; top: 101px;">
+                    Configuraciónx
+                </div>
+            </div> -->
+
             <div class="vversion">
                 {{version}}
             </div>

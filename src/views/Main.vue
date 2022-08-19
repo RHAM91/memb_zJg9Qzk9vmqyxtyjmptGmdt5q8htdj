@@ -32,6 +32,7 @@
 import axios from 'axios'
 import { pregunta } from '../components/functions/alertas'
 import { IP, PUERTO } from '@/config/parametros'
+
 export default {
     name: 'Principal',
     data() {

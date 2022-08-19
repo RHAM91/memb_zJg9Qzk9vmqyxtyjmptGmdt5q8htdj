@@ -71,21 +71,27 @@ export default {
         return{
             usuario: '',
             password: '',
+            ipr: ''
         }
     },
     computed:{
         ...mapState(['token'])
     },
     methods:{
+        async getIP(){
+            const response = await axios.get('https://api.ipify.org?format=json')
+            this.ipr = response.data.ip
+        },
         login: async function(){
 
             let formulario = {
                 username: this.usuario,
-                password: this.password
+                password: this.password,
+                ip: this.ipr
             }
 
             try {
-                
+
                 let data = await axios.post(`http://${IP}:${PUERTO}/api/login/sesion`, formulario)
     
                 if(data.data.message == 'CONTRASEÑA INCORRECTA'){
@@ -105,6 +111,7 @@ export default {
                     this.get_token(data.data.token)
                     //this.set_t2(data.data.token)
 
+
                     this.$router.replace('Main')
     
                 }
@@ -119,7 +126,10 @@ export default {
         ...mapActions(['get_token']),
         //...mapMutations(['set_t2'])
    
-    }
+    },
+    mounted() {
+        this.getIP()
+    },
 }
 </script>
 

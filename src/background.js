@@ -8,6 +8,7 @@ import { autoUpdater } from 'electron-updater'
 import fs from 'fs'
 import os from 'os'
 import macaddress from 'macaddress'
+// import axios from 'axios'
 import path from 'path'
 
 
@@ -47,6 +48,7 @@ function buscarActualizacion(){
     // })
   })
 }
+
 
 async function createWindow() {
   // Create the browser window.
@@ -122,6 +124,17 @@ ipcMain.on('ok_update', (event) =>{
   autoUpdater.quitAndInstall()
 })
 
+
+// --> EVENTO PARA OBTENER IP PUBLICA
+
+// ipcMain.on('obtenerIP', async (event) =>{
+//   try {
+//     const response = await axios.get('https://api.ipify.org?format=json')
+//     event.sender.send('respuesta', response.data.ip)
+//   } catch (error) {
+//     console.log(error)
+//   }
+// })
 
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
