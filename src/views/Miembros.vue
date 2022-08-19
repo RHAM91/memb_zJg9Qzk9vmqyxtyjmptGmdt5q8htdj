@@ -4,7 +4,7 @@
     <div class="contenedor">
         <div class="asidex">
             <div class="icono_menu_a" @mouseenter="mostrar_titulo('inicio')" @mouseleave="ocultar_titulo('inicio')" @click="set_ruta('Main')">
-                <i class="fas fa-bars"></i>
+                <i class="fas fa-home"></i>
                 <div v-if="btn_btn == 'inicio'" class="nombre_seccion">
                     Inicio
                 </div>

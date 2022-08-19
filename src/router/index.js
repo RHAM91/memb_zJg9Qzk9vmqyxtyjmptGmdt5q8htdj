@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '@/views/Login.vue'
 import Main from '@/views/Main.vue'
 import Miembros from '@/views/Miembros.vue'
+import Logs from '@/views/Logs.vue'
 import axios from 'axios'
 import { IP, PUERTO } from '../config/parametros'
 
@@ -34,6 +35,14 @@ Vue.use(VueRouter)
         path: '/miembros',
         name: 'Miembros',
         component: Miembros,
+        meta:{
+            autentificado: true
+        }
+    },
+    {
+        path: '/logs',
+        name: 'Logs',
+        component: Logs,
         meta:{
             autentificado: true
         }

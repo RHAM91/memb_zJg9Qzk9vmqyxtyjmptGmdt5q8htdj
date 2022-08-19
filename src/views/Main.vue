@@ -18,6 +18,15 @@
                     </div>
                 </div>
 
+                <div class="modulo" @click="set_ruta('Logs')">
+                    <div class="titulo_modulo">
+                        LOGS
+                    </div>
+                    <div class="cuerpo_modulo">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                </div>
+
             </div>
 
             <div class="cerrar_sesion_btn" @click="salir">
@@ -95,6 +104,7 @@ export default {
         .modulo{
             width: 200px;
             height: 200px;
+            margin-right: 10px;
             border: 1px solid #e9e9e9;
         }
             .titulo_modulo{
